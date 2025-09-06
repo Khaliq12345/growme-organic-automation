@@ -1,6 +1,4 @@
-def main():
-    print("Hello from growme-organic-automation!")
-
+from src.api.app import start_app
 
 if __name__ == "__main__":
-    main()
+    start_app()
