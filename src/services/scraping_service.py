@@ -11,6 +11,7 @@ import pandas as pd
 PROCESS_NAME = "Company_domains_gte1"
 TIMEOUT = 120000
 INPUT_FILE_NAME = f"./inputs/{PROCESS_NAME}.csv"
+SPLIT_NUMBER = 500
 
 # Check for status file to continue progress
 STATUS_FILE = "status.txt"
@@ -102,7 +103,8 @@ def start_downloading(
 def main():
     # split the dataframe into batches of 1000s
     chunks = [
-        DATAFRAME.iloc[i : i + 1000] for i in range(0, len(DATAFRAME), 1000)
+        DATAFRAME.iloc[i : i + SPLIT_NUMBER]
+        for i in range(0, len(DATAFRAME), SPLIT_NUMBER)
     ]
     for batch_number, chunk in enumerate(chunks):
         if batch_number <= STATUS_NUMBER:
